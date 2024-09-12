@@ -1,19 +1,21 @@
-const IngredientList = ({ Ingredients, addToBurger }) => {
-    return (
-      <>
-        <ul>
-          {Ingredients.map((Ingredient) => (
-            <li
-              key={Ingredient.name}
-              style={{ backgroundColor: Ingredient.color }}
-            >
-              <p>{Ingredient.name}</p>
-              <button onClick={() => addToBurger(Ingredient)}>+</button>
-            </li>
-          ))}
-        </ul>
-      </>
-    );
+const IngredientList = ({ingredients, name, handleIngredient}) => {
+  const deriveButton = () => {
+      if(name.includes("AvailableIngredients")) {
+          return '+'
+      } else if (name.includes("BurgerStack")) {
+          return '-'
+      };
   };
   
-  export default IngredientList;
+  return(
+      <ul>
+          {ingredients.map((ingredient) => (
+              <li style={{backgroundColor: ingredient.color}}>{ingredient.name}
+                  <button onClick={() => {handleIngredient(ingredient)}}>{deriveButton()}</button>
+              </li>
+          ))}
+      </ul>
+  );
+};
+
+export default IngredientList;
